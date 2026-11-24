@@ -1,0 +1,20 @@
+{
+  "name": "omp-vibe",
+  "displayName": "OMP Vibe Mode",
+  "version": "1.0.0",
+  "description": "Imitates oh-my-pi (omp) /vibe mode and /prewalk handoff: uses PreToolUse & PreInvocation hooks to disable direct edit/command tools on the main Director session while opening worker orchestration for persistent fast (flash) & good (pro) subagents, plus a one-shot planning-to-implementation prewalk gate on normal sessions.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "/vibe 帮我重构并优化当前项目，拆分为并行工作流交给 fast 和 good 子代理执行",
+    "/vibe 先派 fast 子代理排查所有报错并收集日志，再派 good 子代理设计修复方案",
+    "/vibe off 退出 Vibe 模式并恢复主会话常规工具",
+    "/prewalk 先强规划建好 todos，首改后自动转 fast 实现风格收尾"
+  ],
+  "author": {
+    "name": "Antigravity & OMP Vibe Adapter"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/can1357/oh-my-pi.git"
+  }
+}

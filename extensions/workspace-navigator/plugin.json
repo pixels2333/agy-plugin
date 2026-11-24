@@ -1,0 +1,5 @@
+{
+  "name": "workspace-navigator",
+  "description": "VS Code 风格工作区文件树浏览器与 Git 源代码管理面板（分支切换、代码变更、内联 Diff、提交历史与 Agent 协作）",
+  "logo": "assets/logo.svg"
+}

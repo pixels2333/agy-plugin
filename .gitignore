@@ -1,0 +1,25 @@
+# Python cache & logs
+__pycache__/
+*.py[cod]
+*.log
+
+# Node
+node_modules/
+
+# Extracted Antigravity app files (root only)
+/main.js
+/index.html
+
+# Collected data, runtime state, and capture dumps
+stats.json
+tokens.json
+rpc_out.json
+ui_port.txt
+injector/capture-report.json
+injector/.inject-ids.json
+**/.port
+**/vibe-panel-port.json
+
+# Screenshots & packaged archives
+*.png
+*.zip

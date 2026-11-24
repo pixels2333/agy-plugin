@@ -1,0 +1,18 @@
+{
+  "command": "node",
+  "args": ["main.mjs"],
+  "restart_policy": "always",
+  "display_name": "Antigravity 用量与性能监控",
+  "description": "实时监控当前会话 Token 吞吐、上下文占用、首字延迟 TTFT 以及账户额度与配额。",
+  "has_web_ui": true,
+  "ui_config": {
+    "display_name": "Antigravity 用量与性能监控",
+    "views": [
+      {
+        "path": "/",
+        "entrypoint": "SIDECAR_UI_ENTRYPOINT_AUX_PANE",
+        "title": "用量与指标监控"
+      }
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>OMP Vibe Mode 控制台</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="/preload.js" onerror="/* preload fallback */"></script>
+</head>
+<body class="theme-flat-dark">
+  <div class="panel-layout">
+    <!-- Top Navigation Header -->
+    <header class="panel-header">
+      <div class="header-left">
+        <div class="brand-badge">
+          <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+          <span class="brand-name">Vibe Mode</span>
+        </div>
+        <span class="version-tag">omp</span>
+      </div>
+
+      <div class="header-right">
+        <div class="session-dropdown-wrapper">
+          <select id="session-select" class="session-select" title="选择当前控制的会话">
+            <option value="">载入中...</option>
+          </select>
+        </div>
+        <button id="btn-manual-refresh" class="btn-icon" title="刷新状态">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-1.19"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Scrollable Main Container -->
+    <main class="panel-main">
+      <!-- Section 1: Hero Modern Flat Mode Switch Card -->
+      <section class="flat-card hero-switch-card" id="hero-card">
+        <div class="hero-top-row">
+          <div class="hero-info">
+            <div class="status-indicator-pill" id="status-pill">
+              <span class="status-dot"></span>
+              <span class="status-text" id="status-text">检测中...</span>
+            </div>
+            <h2 class="hero-title" id="hero-title">Director 编排模式</h2>
+          </div>
+
+          <!-- Modern Flat Toggle Switch -->
+          <div class="toggle-switch-container">
+            <label class="flat-switch" for="mode-toggle-checkbox" title="点击切换 Vibe Mode 状态">
+              <input type="checkbox" id="mode-toggle-checkbox">
+              <span class="switch-slider">
+                <span class="switch-knob">
+                  <span class="knob-spinner" id="knob-spinner"></span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <p class="hero-description" id="hero-description">
+          主会话直接改动已沙箱隔离，仅允许只读抽检，强制由子代理工作机并发执行任务。
+        </p>
+        <p class="hero-description" id="prewalk-line" style="display:none"></p>
+
+        <div class="hero-quick-row">
+          <span class="sync-indicator" id="sync-indicator">
+            <span class="sync-live-dot"></span>
+            <span id="sync-label">实时同步 (1.5s)</span>
+          </span>
+          <div class="quick-btn-group">
+            <button id="btn-quick-on" class="btn-subtle" title="一键开启">开启</button>
+            <button id="btn-quick-off" class="btn-subtle" title="退出并清理所有 Worker">退出并清理</button>
+            <button id="btn-prewalk" class="btn-subtle" title="武装/取消 Prewalk 一次性交接（强规划→快实现）">Prewalk 武装</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Flat Tool Gate Matrix -->
+      <section class="flat-card gate-matrix-card">
+        <div class="card-header-clean">
+          <div class="header-title-clean">
+            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+            <span>工具门禁策略 (Tool Gate)</span>
+          </div>
+          <span class="badge-subtle" id="gate-badge">PreToolUse 拦截</span>
+        </div>
+
+        <div class="gate-panels-stack">
+          <!-- Disabled Tools Group -->
+          <div class="gate-group" id="gate-disabled-group">
+            <div class="gate-group-label">
+              <span class="dot-indicator dot-red"></span>
+              <span>主会话禁用工具 (Direct Blocked)</span>
+            </div>
+            <div class="chips-flex" id="chips-disabled">
+              <span class="flat-chip chip-red">edit_file</span>
+              <span class="flat-chip chip-red">write_file</span>
+              <span class="flat-chip chip-red">run_command</span>
+              <span class="flat-chip chip-red">manage_task</span>
+              <span class="flat-chip chip-red">search_web</span>
+            </div>
+          </div>
+
+          <!-- Allowed Tools Group -->
+          <div class="gate-group" id="gate-allowed-group">
+            <div class="gate-group-label">
+              <span class="dot-indicator dot-green"></span>
+              <span>主会话开放工具 (Orchestration)</span>
+            </div>
+            <div class="chips-flex" id="chips-allowed">
+              <span class="flat-chip chip-green">read_file (审计抽检)</span>
+              <span class="flat-chip chip-blue">vibe-fast (Flash 机械机)</span>
+              <span class="flat-chip chip-purple">vibe-good (Pro 专家机)</span>
+              <span class="flat-chip chip-green">send_message</span>
+              <span class="flat-chip chip-green">vibe_* MCP 工具集</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2.5: Director 主代理消息 (Assistant Messages) -->
+      <section class="flat-card director-card">
+        <div class="card-header-clean">
+          <div class="header-title-clean">
+            <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3a7 7 0 0 0-4 12.7V18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 3z"/>
+              <path d="M9 21h6"/>
+            </svg>
+            <span>Director 主代理消息</span>
+          </div>
+          <span class="badge-subtle" id="director-count">0 条</span>
+        </div>
+        <div class="director-list" id="director-list">
+          <!-- Dynamic director assistant messages injected by app.js -->
+        </div>
+        <div class="empty-state-flat" id="director-empty">
+          <div class="empty-title">暂无主代理消息</div>
+          <p class="empty-text">当前会话尚无 assistant 回复，或 transcript 暂不可读。</p>
+        </div>
+      </section>
+
+
+      <!-- Section 3: Quick Reference Accordion -->
+      <section class="flat-card help-card">
+        <details class="clean-details">
+          <summary class="clean-summary">
+            <span class="summary-title">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="help-icon">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+              <span>Vibe Mode 调度指令速查</span>
+            </span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </summary>
+          <div class="details-body">
+            <div class="ref-row">
+              <span class="ref-cmd">/vibe-on</span>
+              <span class="ref-desc">即时开启 Director 模式（0ms，不消耗 Token）</span>
+            </div>
+            <div class="ref-row">
+              <span class="ref-cmd">/vibe-off</span>
+              <span class="ref-desc">即时退出并恢复主会话常规写工具</span>
+            </div>
+            <div class="ref-row">
+              <span class="ref-cmd">/vibe &lt;任务&gt;</span>
+              <span class="ref-desc">开启模式并把指令作为 Director 目标即刻编排执行</span>
+            </div>
+            <div class="ref-row">
+              <span class="ref-cmd">子代理规范</span>
+              <span class="ref-desc">上面 Role 统一使用中文名，下面 TypeName 严格指定为 vibe-fast 或 vibe-good</span>
+            </div>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <!-- Footer Bar -->
+    <footer class="panel-footer">
+      <span class="footer-text" id="footer-host">127.0.0.1:51400</span>
+      <span class="footer-dot">•</span>
+      <span class="footer-text" id="footer-sync">已同步</span>
+      <span class="footer-right">OMP Vibe for Antigravity</span>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

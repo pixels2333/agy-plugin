@@ -1,0 +1,5 @@
+{
+  "name": "agy2-stream-stats",
+  "description": "Antigravity 实时用量与性能监控面板（Token 消耗、上下文占用、首字延迟 TTFT、账户额度与历史统计）",
+  "logo": "assets/logo.svg"
+}

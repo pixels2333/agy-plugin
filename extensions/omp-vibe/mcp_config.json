@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "omp-vibe": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Administrator\\.gemini\\config\\plugins\\omp-vibe\\mcp\\vibe-mcp-server.mjs"
+      ]
+    }
+  }
+}

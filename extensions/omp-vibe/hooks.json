@@ -1,0 +1,24 @@
+{
+  "omp-vibe-mode-guard": {
+    "enabled": true,
+    "PreInvocation": [
+      {
+        "type": "command",
+        "command": "node ./hooks/vibe-hook.mjs pre-invocation",
+        "timeout": 10
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ./hooks/vibe-hook.mjs pre-tool",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
